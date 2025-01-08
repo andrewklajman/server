@@ -39,12 +39,15 @@ in
 
         # This will fail on a new installation since ti returns a error code (and so stopping the remainder of the service)
         ExecStartPre = "${pkgs.writers.writeBash "conf-update" '' 
-          rm ${conf_location}/qBittorrent.conf
-          cp ${source_location}/qBittorrent.conf ${conf_location}/qBittorrent.conf
-          rm ${conf_location}/categories.json
-          cp ${source_location}/categories.json ${conf_location}/categories.json
+	  if [ -d ${conf_location} ]; then
+            rm ${conf_location}/qBittorrent.conf
+            cp ${source_location}/qBittorrent.conf ${conf_location}/qBittorrent.conf
+            rm ${conf_location}/categories.json
+            cp ${source_location}/categories.json ${conf_location}/categories.json
+	  fi
         ''}";
 
+	# This shoudl be a services that updates when there is a change to the path
         ExecStop = "${pkgs.writers.writeBash "conf-backup" ''
           cp ${conf_location}/qBittorrent.conf ${source_location}/qBittorrent.conf
           cp ${conf_location}/categories.json ${source_location}/categories.json 
