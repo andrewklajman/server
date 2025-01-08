@@ -21,7 +21,8 @@
       lla = "ls -al";
       vi = "nvim";
       vim = "nvim";
-      nr = "nixos-rebuild switch --flake ./#server";
+      nr = "nixos-rebuild switch --flake /etc/nixos/#server";
+      nrr = "nixos-rebuild switch --flake /etc/nixos/#server && reboot";
       ts = "tailscale status";
       ms = "mullvad status";
       mc = "mullvad connect";
