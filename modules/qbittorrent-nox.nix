@@ -32,6 +32,7 @@ in
       script = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
       after = [ "mullvad-conn-check.service" ];
       serviceConfig = {
+        Type = "oneshot";
         NonBlocking = "true";
         KillMode = "process";
         Restart = "on-failure";

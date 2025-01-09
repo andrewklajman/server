@@ -12,6 +12,10 @@
         "--socks5-server=127.0.0.1:1055"
       ];
     };
-  };
 
+    systemd.services.tailscaled = {
+      after = [ "mullvad-conn-check.service" ];
+      serviceConfig.Type = "oneshot";
+    };
+  };
 }
