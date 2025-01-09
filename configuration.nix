@@ -6,15 +6,6 @@
 
 {
  
-# --- Configuration --- #
-  tailscale.enable = true;
-  mullvad.enable = true;
-  microsocks.enable = true;
-  qbittorrent-nox.enable = true;
-  audiobookshelf.enable = true;
-# --- Configuration --- #
-
-
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix

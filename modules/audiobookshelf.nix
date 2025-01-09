@@ -13,6 +13,8 @@ in
   };
 
   config = lib.mkIf config.audiobookshelf.enable {
+
+
     virtualisation.oci-containers.containers.audiobookshelf = {
       image = "ghcr.io/advplyr/audiobookshelf:latest";
       ports = [ "13378:80" ];
@@ -24,13 +26,18 @@ in
       ];
     };
 
-    systemd.services.podman-audiobookshelf.serviceConfig = {
+    systemd.services.docker-audiobookshelf.serviceConfig = {
       ExecStartPre = "${
         pkgs.writers.writeBash "createvolumes" ''
-          ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/audiobooks
-          ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/podcasts
-          ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/metadata
-          ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/config
+          ${pkgs.coreutils}/bin/echo ${builtins.toString ./.} >> /etc/nixos/output
+
+	  if [ ! -d ${home_directory} ]; then
+
+            ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/audiobooks
+            ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/podcasts
+            ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/metadata
+            ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/config
+	  fi
         ''
       }";
     };

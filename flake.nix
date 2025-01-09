@@ -1,5 +1,5 @@
 {
-  description = "A simple NixOS flake";
+  description = "System Configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -11,7 +11,6 @@
       system = "x86_64-linux";
       modules = [ 
         agenix.nixosModules.default
-        ./configuration.nix 
 	./modules
       ];
     };

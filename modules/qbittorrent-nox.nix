@@ -28,7 +28,9 @@ in
 
     systemd.services.qbittorrent-nox = {
       enable = true;
+      wantedBy = [ "multi-user.target" ];
       script = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
+      after = [ "mullvad-conn-check.service" ];
       serviceConfig = {
         NonBlocking = "true";
         KillMode = "process";
@@ -37,7 +39,6 @@ in
         RuntimeDirectoryMode = "0750";
         User = "torrent";
 
-        # This will fail on a new installation since ti returns a error code (and so stopping the remainder of the service)
         ExecStartPre = "${pkgs.writers.writeBash "conf-update" '' 
 	  if [ -d ${conf_location} ]; then
             rm ${conf_location}/qBittorrent.conf
@@ -47,13 +48,11 @@ in
 	  fi
         ''}";
 
-	# This shoudl be a services that updates when there is a change to the path
         ExecStop = "${pkgs.writers.writeBash "conf-backup" ''
           cp ${conf_location}/qBittorrent.conf ${source_location}/qBittorrent.conf
           cp ${conf_location}/categories.json ${source_location}/categories.json 
         ''}";
       };
-      wantedBy = [ "multi-user.target" ];
     };
 
   };

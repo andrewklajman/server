@@ -31,6 +31,9 @@
       ss = "systemctl status";
       sr = "systemctl restart";
       j = "journalctl -xeu";
+
+      ssmc = "ss mullvad-conf.service";
+      jmc = "j mullvad-conf.service";
     };
   };
 

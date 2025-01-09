@@ -1,16 +1,37 @@
 { config, pkgs, lib, ... }:
 
-# It looks like this does not present many options to configure Mullvad.
-# So I will need to 
-#    * Log in
-#    * Turn on Lockdown mode
-#    * Make LAN services available
-#    * set to au
-
 {
   options.mullvad.enable = lib.mkEnableOption "mullvad";
 
   config = lib.mkIf config.mullvad.enable {
     services.mullvad-vpn.enable = true;
+
+#    systemd.services.mullvad-conf = {
+#      enable = true;
+#      wantedBy = [ "multi-user.target" ];
+#      after = [ "mullvad-daemon.service" ];
+#      script = "${pkgs.writers.writeBash "mullvad-configure" ''
+#        ${pkgs.mullvad}/bin/mullvad lockdown-mode set on
+#        ${pkgs.mullvad}/bin/mullvad lan set allow
+#        ${pkgs.mullvad}/bin/mullvad relay set location au
+#        ${pkgs.mullvad}/bin/mullvad connect
+#      ''}";
+#      serviceConfig = {
+#        Type = "oneshot";
+#      };
+#    };
+#
+#    systemd.services.mullvad-conn-check = {
+#      enable = true;
+#      wantedBy = [ "multi-user.target" ];
+#      after = [ "mullvad-conf.service" ];
+#      script = "${pkgs.writers.writeBash "mullvad-conn-check" ''
+#        ${pkgs.mullvad}/bin/mullvad status | ${pkgs.gnugrep}/bin/grep Connected
+#      ''}";
+#      serviceConfig = {
+#        Type = "oneshot";
+#      };
+#    };
+
   };
 }
