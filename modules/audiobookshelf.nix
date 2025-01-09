@@ -1,47 +1,33 @@
 { config, pkgs, lib, ... }:
 
 let 
-  home_directory = config.audiobookshelf.home_directory;
+  data_dir = config.audiobookshelf.data_dir;
+  config_dir = config.audiobookshelf.config_dir;
 in 
 {
   options.audiobookshelf = { 
     enable = lib.mkEnableOption "audiobookshelf";
-    home_directory = lib.mkOption {
+    data_dir = lib.mkOption {
       type = lib.types.str;
       default = "/mnt/audiobookshelf";
+    };
+    config_dir = lib.mkOption {
+      type = lib.types.str;
+      default = "/etc/nixos/files/abs_config";
     };
   };
 
   config = lib.mkIf config.audiobookshelf.enable {
-
-
     virtualisation.oci-containers.containers.audiobookshelf = {
       image = "ghcr.io/advplyr/audiobookshelf:latest";
       ports = [ "13378:80" ];
       volumes = [
-        "${home_directory}/audiobooks:/audiobooks"
-        "${home_directory}/podcasts:/podcasts"
-        "${home_directory}/metadata:/metadata"
-        "${home_directory}/config:/config"
+        "${config_dir}:/config"
+        "${data_dir}/audiobooks:/audiobooks"
+        "${data_dir}/podcasts:/podcasts"
+        "${data_dir}/metadata:/metadata"
       ];
     };
 
-    systemd.services.docker-audiobookshelf.serviceConfig = {
-      ExecStartPre = "${
-        pkgs.writers.writeBash "createvolumes" ''
-          ${pkgs.coreutils}/bin/echo ${builtins.toString ./.} >> /etc/nixos/output
-
-	  if [ ! -d ${home_directory} ]; then
-
-            ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/audiobooks
-            ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/podcasts
-            ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/metadata
-            ${pkgs.coreutils}/bin/mkdir -p ${home_directory}/config
-	  fi
-        ''
-      }";
-    };
-
   };
-
 }
