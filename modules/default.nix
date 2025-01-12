@@ -1,27 +1,17 @@
-{ config, pkgs, lib, agenix, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
-    ../configuration.nix 
-
-    ./agenix.nix
-    ./environment.nix
-    ./tailscale.nix
-    ./mullvad.nix
+    ./agenix
+    ./audiobookshelf
+    ./environment
+    ./metube
     ./microsocks.nix
-    ./qbittorrent-nox.nix
-    ./audiobookshelf.nix
-
-    {
-      tailscale.enable = true;
-      mullvad.enable = true;
-      microsocks.enable = true;
-      qbittorrent-nox.enable = true;
-
-      virtualisation.oci-containers.backend = "docker"; # Podman: localhost:XXXX works; nixos:XXXX fails
-      audiobookshelf.enable = true;
-    }
-
+    ./mullvad.nix
+    ./password-manager.nix
+    ./qbittorrent-nox
+    ./tailscale
+   #./tor.nix
   ];
 }
 

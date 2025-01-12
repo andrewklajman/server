@@ -9,6 +9,7 @@
     neovim 
     git
     spice-vdagent 
+    oxker # docker tui
   ];
 
   environment = {

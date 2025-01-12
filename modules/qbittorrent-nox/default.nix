@@ -13,7 +13,7 @@ in
     };
     source_location = lib.mkOption {
       type = lib.types.str;
-      default = "/etc/nixos/files";
+      default = "/etc/nixos/modules/qbittorrent-nox";
     };
   };
 

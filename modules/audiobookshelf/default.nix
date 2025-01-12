@@ -13,7 +13,7 @@ in
     };
     config_dir = lib.mkOption {
       type = lib.types.str;
-      default = "/etc/nixos/files/abs_config";
+      default = "/etc/nixos/modules/audiobookshelf/abs_config";
     };
   };
 

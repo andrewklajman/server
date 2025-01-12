@@ -16,6 +16,5 @@
       user = "microsocks";
     };
 
-    # TODO: Add after for micorsocks service
   };
 }
