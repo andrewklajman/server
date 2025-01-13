@@ -18,8 +18,6 @@
     nixosConfigurations.server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [ 
-        { services.vaultwarden.enable = true; }
-
         ./hosts/server/configuration.nix
 
         agenix.nixosModules.default

@@ -10,6 +10,7 @@
     git
     spice-vdagent 
     oxker # docker tui
+    ranger
   ];
 
   environment = {
