@@ -12,6 +12,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     agenix.url = "github:ryantm/agenix";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, agenix, home-manager, ... }@inputs: {
@@ -22,10 +26,17 @@
         agenix.nixosModules.default
 	./modules
 
-	{
-	  dwm.enable = true;
+        home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.andrew = import ./home.nix;
+        }
 
+	{ 
+	  dwm.enable = true; 
+	  zsh.enable = true;
 	}
+
       ];
     };
 
