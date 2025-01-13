@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  passmenulogin = pkgs.writeShellScriptBin "passmenulogin" '' ${builtins.readFile ./passmenulogin} '';
+in
 {
   options.dwm.enable = lib.mkEnableOption "dwm";
 

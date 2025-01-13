@@ -12,7 +12,7 @@
     ./password-manager.nix
     ./qbittorrent-nox
     ./tailscale
-    ./zsh.nix
+#    ./zsh.nix
    #./tor.nix
   ];
 }

@@ -85,15 +85,7 @@
     isNormalUser = true;
     description = "andrew";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
   };
-
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "andrew";
 
   # Install firefox.
   programs.firefox.enable = true;

@@ -21,30 +21,18 @@
   outputs = { self, nixpkgs, agenix, home-manager, ... }@inputs: {
     nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit agenix home-manager;  };
       modules = [
         ./hosts/pc/configuration.nix
-        agenix.nixosModules.default
 	./modules
-
-        home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.andrew = import ./home.nix;
-        }
-
-	{ 
-	  dwm.enable = true; 
-	  zsh.enable = true;
-	}
-
       ];
     };
 
     nixosConfigurations.server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit agenix home-manager;  };
       modules = [ 
         ./hosts/server/configuration.nix
-        agenix.nixosModules.default
 	./modules
 
         {
