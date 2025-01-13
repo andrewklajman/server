@@ -14,12 +14,25 @@
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, agenix, ... }@inputs: {
+  outputs = { self, nixpkgs, agenix, home-manager, ... }@inputs: {
+    nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./hosts/pc/configuration.nix
+        agenix.nixosModules.default
+	./modules
+
+	{
+	  dwm.enable = true;
+
+	}
+      ];
+    };
+
     nixosConfigurations.server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [ 
         ./hosts/server/configuration.nix
-
         agenix.nixosModules.default
 	./modules
 

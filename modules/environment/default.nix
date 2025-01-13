@@ -1,16 +1,19 @@
 { config, pkgs, ... }:
 
 {
-
-  services.qemuGuest.enable = true;
-  services.spice-vdagentd.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+#  services.qemuGuest.enable = true;
+#  services.spice-vdagentd.enable = true;
+
   environment.systemPackages = with pkgs; [ 
     neovim 
     git
     spice-vdagent 
-    oxker # docker tui
+    oxker
     ranger
+    firefox
+    btop
   ];
 
   environment = {
@@ -23,8 +26,8 @@
       lla = "ls -al";
       vi = "nvim";
       vim = "nvim";
-      nr = "nixos-rebuild switch --flake /etc/nixos/#server";
-      nrr = "nixos-rebuild switch --flake /etc/nixos/#server && reboot";
+      nr = "nixos-rebuild switch --flake ./#pc";
+      nrr = "nixos-rebuild switch --flake ./#pc && reboot";
       ts = "tailscale status";
       ms = "mullvad status";
       mc = "mullvad connect";
@@ -38,5 +41,4 @@
       jmc = "j mullvad-conf.service";
     };
   };
-
 }

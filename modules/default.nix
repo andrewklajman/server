@@ -4,6 +4,7 @@
   imports = [
     ./agenix
     ./audiobookshelf
+    ./desktop-environment
     ./environment
     ./metube
     ./microsocks.nix
