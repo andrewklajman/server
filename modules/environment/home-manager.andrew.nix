@@ -16,11 +16,11 @@
 
   # home.packages = with pkgs; [ ];
 
-  programs.git = {
-    enable = true;
-    userName = "andrew";
-    userEmail = "andrew.klajman@gmail.com";
-  };
+#  programs.git = {
+#    enable = true;
+#    userName = "andrew";
+#    userEmail = "andrew.klajman@gmail.com";
+#  };
 
   programs.starship.enable = false;
 
