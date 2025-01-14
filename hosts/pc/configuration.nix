@@ -5,12 +5,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  users.users.andrew = {
-    isNormalUser = true;
-    description = "andrew";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
-
+#  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -40,6 +35,14 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+#  # Enable the X11 windowing system.
+#  services.xserver.enable = true;
+#
+#
+#  # Enable the GNOME Desktop Environment.
+#  services.xserver.displayManager.gdm.enable = true;
+#  services.xserver.desktopManager.gnome.enable = true;
+  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -60,23 +63,20 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     tree
-  #   ];
-  # };
+   users.users.andrew = {
+     isNormalUser = true;
+     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+   };
 
   # programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
-     git
-     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     wget
-   ];
+  # environment.systemPackages = with pkgs; [
+  #   neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #   git
+  #   wget
+  # ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

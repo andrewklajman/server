@@ -18,10 +18,10 @@ in
           layout = "au"; 
           variant = "";
         };
-        deviceSection = ''
-          Option "DRI" "2"
-          Option "TearFree" "true"
-        '';
+#        deviceSection = ''
+#          Option "DRI" "2"
+#          Option "TearFree" "true"
+#        '';
         displayManager = {
           startx.enable = true;
           gdm.enable = true;

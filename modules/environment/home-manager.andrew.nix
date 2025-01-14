@@ -9,20 +9,11 @@
     };
   };
 
-  xresources.properties = {
-    "Xcursor.size" = 16;
-    "Xft.dpi" = 172;
+  programs.git = {
+    enable = true;
+    userName = "andrew";
+    userEmail = "andrew.klajman@gmail.com";
   };
-
-  # home.packages = with pkgs; [ ];
-
-#  programs.git = {
-#    enable = true;
-#    userName = "andrew";
-#    userEmail = "andrew.klajman@gmail.com";
-#  };
-
-  programs.starship.enable = false;
 
 #  programs.neovim = 
 #  let
