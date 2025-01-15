@@ -6,6 +6,18 @@
 
 {
  
+ # --- Services ------------------------------ #
+ audiobookshelf.enable = true;
+ metube.enable = true;
+ microsocks.enable = true;
+ mullvad.enable = true;
+ password-manager.enable = true;
+ qbittorrent-nox.enable = true;
+ tailscale.enable = true;
+
+ virtualisation.oci-containers.backend = "docker"; # Podman: localhost:XXXX works; nixos:XXXX fails
+ # ------------------------------------------- #
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
