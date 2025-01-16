@@ -1,5 +1,5 @@
 # TODO: DNS Server
-# TDOD: tor module
+# TODO: tor module
 
 # TODO: Instagram type server
 # TODO: Link to cloudflare

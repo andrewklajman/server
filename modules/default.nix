@@ -12,8 +12,8 @@
     ./password-manager.nix
     ./qbittorrent-nox
     ./tailscale
-#    ./zsh.nix
    #./tor.nix
+    ./virt-manager.nix
   ];
 }
 

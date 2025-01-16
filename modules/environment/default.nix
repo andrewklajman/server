@@ -22,10 +22,15 @@
 
   dwm.enable = true;
 
+  programs.tmux = {
+    enable = true;
+    shortcut = "a";
+    keyMode = "vi";
+    customPaneNavigationAndResize = true;
+  };
+
   networking.networkmanager.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-#  services.qemuGuest.enable = true;
-#  services.spice-vdagentd.enable = true;
   environment.systemPackages = with pkgs; [ 
     neovim 
     git
@@ -53,21 +58,6 @@
   programs.gnupg.agent = {
     enable = true;
     pinentryPackage = pkgs.pinentry-qt;
-  };
-
-  programs.tmux = {
-    enable = true;
-    extraConfig = ''
-    unbind C-b
-    set -g prefix C-a
-    bind C-a send-prefix
-
-    bind k select-pane -U
-    bind j select-pane -D
-    bind h select-pane -L
-    bind l select-pane -R
-    '';
-
   };
 
 # --------------------------------------------------------------------- #
