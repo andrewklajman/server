@@ -1,3 +1,4 @@
+https://tao-of-tmux.readthedocs.io/en/latest/	
 https://tmuxcheatsheet.com/
 
 # Sessions
