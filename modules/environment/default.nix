@@ -22,6 +22,15 @@
 
   dwm.enable = true;
 
+  # Reducing disk space usage
+      boot.loader.systemd-boot.configurationLimit = 10;
+      nix.settings.auto-optimise-store = true;
+      nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 1w";
+      };
+
   programs.tmux = {
     enable = true;
     shortcut = "a";
