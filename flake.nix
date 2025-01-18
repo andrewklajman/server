@@ -17,12 +17,21 @@
   };
 
   outputs = { self, nixpkgs, agenix, home-manager, ... }@inputs: {
+    nixosConfigurations.lenovo = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit agenix home-manager;  };
+      modules = [
+        ./hosts/lenovo/configuration.nix
+    	./modules
+      ];
+    };
+
     nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit agenix home-manager;  };
       modules = [
         ./hosts/pc/configuration.nix
-	./modules
+    	./modules
       ];
     };
 

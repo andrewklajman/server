@@ -8,7 +8,13 @@ in
 
   config = lib.mkIf config.dwm.enable {
     fonts.packages = with pkgs; [ source-code-pro font-awesome ];
-    environment.systemPackages = with pkgs; [ dmenu st ];
+    environment.systemPackages = with pkgs; [ 
+      dmenu 
+      st 
+      pass
+      xclip
+      passmenulogin 
+    ];
 
     services = {
       xserver = {
@@ -18,10 +24,10 @@ in
           layout = "au"; 
           variant = "";
         };
-#        deviceSection = ''
-#          Option "DRI" "2"
-#          Option "TearFree" "true"
-#        '';
+        deviceSection = ''
+          Option "DRI" "2"
+          Option "TearFree" "true"
+        '';
         displayManager = {
           startx.enable = true;
           gdm.enable = true;
