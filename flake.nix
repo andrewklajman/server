@@ -23,6 +23,11 @@
       modules = [
         ./hosts/lenovo/configuration.nix
     	./modules
+#	{
+#          services.mullvad-vpn = {
+#	    enable = true;
+#	  };
+#	}
       ];
     };
 

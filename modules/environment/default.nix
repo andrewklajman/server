@@ -22,6 +22,13 @@
 
   dwm.enable = true;
 
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   # Reducing disk space usage
       boot.loader.systemd-boot.configurationLimit = 10;
       nix.settings.auto-optimise-store = true;
@@ -41,14 +48,16 @@
   networking.networkmanager.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [ 
-    neovim 
+    alsa-utils
+    autorandr
+    btop
+    firefox ungoogled-chromium
     git
-    spice-vdagent 
+    ledger
+    mpv
+    neovim 
     oxker
     ranger
-    firefox
-    btop
-    autorandr
   ];
 
   environment = {
