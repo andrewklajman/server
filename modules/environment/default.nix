@@ -58,6 +58,7 @@
     neovim 
     oxker
     ranger
+    yt-dlp
   ];
 
   environment = {

@@ -4,6 +4,7 @@
   imports = [
     ./agenix
     ./audiobookshelf
+    ./calibre.nix
     ./desktop-environment
     ./environment
     ./metube

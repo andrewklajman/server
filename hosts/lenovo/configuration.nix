@@ -5,6 +5,8 @@
 { config, pkgs, ... }:
 
 {
+  mullvad.enable = true;
+  calibre.enable = true;
 
 # --- Additional Configuration ----------------------------------------- #
   boot = {
