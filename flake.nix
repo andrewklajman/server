@@ -20,7 +20,7 @@
       specialArgs = { inherit agenix home-manager nixvim;  };
       modules = [
         ./hosts/lenovo/configuration.nix
-    	./modules
+        ./modules
 #	{
 #          services.mullvad-vpn = {
 #	    enable = true;
