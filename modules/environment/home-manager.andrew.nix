@@ -1,6 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixvim, ... }:
+
+# https://valentinpratz.de/posts/2024-02-12-nixvim-home-manager/
 
 {
+  imports = [ nixvim.homeManagerModules.nixvim ];
+
   home = {
     username = "andrew";
     homeDirectory = "/home/andrew";
@@ -14,6 +18,19 @@
     userName = "andrew";
     userEmail = "andrew.klajman@gmail.com";
   };
+
+  programs.nixvim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      opts = {
+        updatetime = 100; # Faster completion
+        relativenumber = true; # Relative line numbers
+        number = true; # Display the absolute line number of the current line
+        hidden = true; # Keep closed buffer open in the background
+      };
+    };
 
 #  programs.neovim = 
 #  let

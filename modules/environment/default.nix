@@ -1,4 +1,4 @@
-{ config, pkgs, agenix, home-manager, ... }:
+{ config, pkgs, agenix, home-manager, nixvim, ... }:
 
 {
   imports = [ 
@@ -6,6 +6,7 @@
     home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = {inherit nixvim;};
         home-manager.users.andrew = import ./home-manager.andrew.nix;
     }
   ];
@@ -55,7 +56,7 @@
     git
     ledger
     mpv
-    neovim 
+    #neovim 
     oxker
     ranger
     yt-dlp

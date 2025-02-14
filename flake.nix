@@ -1,9 +1,3 @@
-# TODO: DNS Server
-# TODO: tor module
-
-# TODO: Instagram type server
-# TODO: Link to cloudflare
-
 {
   description = "System Configuration";
 
@@ -14,12 +8,16 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+        url = "github:nix-community/nixvim";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, agenix, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, agenix, home-manager, nixvim, ... }@inputs: {
     nixosConfigurations.lenovo = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit agenix home-manager;  };
+      specialArgs = { inherit agenix home-manager nixvim;  };
       modules = [
         ./hosts/lenovo/configuration.nix
     	./modules
