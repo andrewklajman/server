@@ -1,5 +1,5 @@
 { config, pkgs, nixvim, ... }:
-
+  
 # https://valentinpratz.de/posts/2024-02-12-nixvim-home-manager/
 
 {
@@ -20,80 +20,55 @@
   };
 
   programs.nixvim = {
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-      opts = {
-        updatetime = 100; # Faster completion
-        relativenumber = true; # Relative line numbers
-        number = true; # Display the absolute line number of the current line
-        hidden = true; # Keep closed buffer open in the background
-      };
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    globals = {
+      mapleader = ",";
+      maplocalleader = ",";
+      netrw_banner = 0;
+      netrw_liststyle = 3;
+      netrw_winsize = 20;
+    };
+    opts = {
+      number = true;
+      relativenumber = true;
+      tabstop = 2;
+      shiftwidth = 2;
+      expandtab = true;
+      cursorline = true;
+      splitbelow = true;
+      splitright = true;
     };
 
-#  programs.neovim = 
-#  let
-#    toLua = str: "lua << EOF\n${str}\nEOF\n";
-#    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-#  in
-#  {
-#    enable = true;
-#    vimdiffAlias = true;
-#    extraLuaConfig = '' ${builtins.readFile ./nvim.init.lua} '';
-#    plugins = with pkgs.vimPlugins; [
-#      auto-pairs
-#      context-vim
-#      tabular
-#      vim-markdown
-#      vim-nix 
-#    ];
-#  };
+    keymaps = [
+      { key = "<leader>l"; action = ":Lexplore<CR>"; }
+      { mode = "n"; key = "<C-h>"; action = "<C-w>h"; }
+      { mode = "n"; key = "<C-j>"; action = "<C-w>j"; }
+      { mode = "n"; key = "<C-k>"; action = "<C-w>k"; }
+      { mode = "n"; key = "<C-l>"; action = "<C-w>l"; }
+      { mode = "n"; key = "<C-Up>"; action = ":resize -2<CR>"; }
+      { mode = "n"; key = "<C-Down>"; action = ":resize +2<CR>"; }
+      { mode = "n"; key = "<C-Left>"; action = ":vertical resize -2<CR>"; }
+      { mode = "n"; key = "<C-Right>"; action = ":vertical resize +2<CR>"; }
 
-# ## nvim init.lua
-# -- https://martinlwx.github.io/en/config-neovim-from-scratch/#the-basics
-# -- Options
-# vim.g.mapleader = ','
-# vim.g.maplocalleader = ','
-# vim.o.number = true
-# vim.o.relativenumber = true
-# vim.o.tabstop = 4
-# vim.o.shiftwidth = 4
-# vim.o.termguicolors = true
-# vim.o.linebreak = true
-# vim.o.clipboard = 'unnamedplus'
-# vim.o.cursorline = true
-# 
-# -- Netrw
-# vim.g.netrw_banner = 0
-# vim.g.netrw_liststyle = 3
-# vim.g.netrw_winsize = 20
-# vim.keymap.set('n','<leader>l',':Lexplore<CR>')
-# 
-# -- Netrw: Bookmarks
-# -- * I feel like I need to come up with a better bookmarking solution.
-# -- * I would like to have a bookmark folder with some symlinks created that I can just go to
-# 
-# -- Windows
-# --   TODO: How to rotate windows
-# --   TODO: How to move windows
-# --   TODO: Splits from netrw
-# vim.o.splitbelow = true
-# vim.o.splitright = true
-# 
-# vim.keymap.set('n', '<C-h>', '<C-w>h', opts)
-# vim.keymap.set('n', '<C-j>', '<C-w>j', opts)
-# vim.keymap.set('n', '<C-k>', '<C-w>k', opts)
-# vim.keymap.set('n', '<C-l>', '<C-w>l', opts)
-# 
-# vim.keymap.set('n', '<C-Up>', ':resize -2<CR>', opts)
-# vim.keymap.set('n', '<C-Down>', ':resize +2<CR>', opts)
-# vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', opts)
-# vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', opts)
-# 
-# --Keybindings
-# vim.keymap.set('n', '<leader>p', ':w<CR><Esc>:! ~/system_configuration/modules/dwm/xdotool.cr.sh<CR>', opts)
+      { mode = "n"; key = "<leader>g"; action = ":Git"; }
+      { mode = "n"; key = "<leader>gs"; action = ":Git status<CR>"; }
+      { mode = "n"; key = "<leader>gl"; action = ":Git log --oneline --graph<CR>"; }
+      { mode = "n"; key = "<leader>gc"; action = ":Git commit -m '"; }
 
+    ];
+
+    plugins = {
+      fugitive.enable = true;
+#      auto-pairs.enable = true;
+#      context-vim.enable = true;
+#      tabular.enable = true;
+#      vim-markdown.enable = true;
+#      vim-nix.enable = true;
+    };
+  };
 
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
