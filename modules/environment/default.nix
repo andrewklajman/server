@@ -56,8 +56,8 @@
     git
     ledger
     mpv
-    #neovim 
     oxker
+    qbittorrent
     ranger
     yt-dlp
   ];
