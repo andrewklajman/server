@@ -49,6 +49,11 @@
   networking.networkmanager.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [ 
+    (pkgs.python3.withPackages (python-pkgs: with python-pkgs; [
+      pandas
+      requests
+    ]))
+
     alsa-utils
     autorandr
     btop
