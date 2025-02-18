@@ -54,9 +54,10 @@
       { mode = "n"; key = "<C-Right>"; action = ":vertical resize +2<CR>"; }
 
       { mode = "n"; key = "<leader>g"; action = ":Git"; }
+      { mode = "n"; key = "<leader>ga"; action = ":Git add .<CR>"; }
       { mode = "n"; key = "<leader>gs"; action = ":Git status<CR>"; }
       { mode = "n"; key = "<leader>gl"; action = ":Git log --oneline --graph<CR>"; }
-      { mode = "n"; key = "<leader>gc"; action = ":Git commit -m '"; }
+      { mode = "n"; key = "<leader>gc"; action = ":Git commit -m ''<C-F>hi"; }
 
     ];
 
