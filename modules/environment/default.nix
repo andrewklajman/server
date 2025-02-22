@@ -30,6 +30,8 @@
     pulse.enable = true;
   };
 
+  time.timeZone = "Australia/Sydney";
+
   # Reducing disk space usage
       boot.loader.systemd-boot.configurationLimit = 10;
       nix.settings.auto-optimise-store = true;
@@ -53,10 +55,11 @@
       pandas
       requests
       matplotlib
+      pygame
     ]))
 
     alsa-utils
-    autorandr
+    arandr autorandr
     btop
     firefox ungoogled-chromium
     git
@@ -65,6 +68,7 @@
     oxker
     qbittorrent
     ranger
+    taskwarrior3 tasksh
     yt-dlp
   ];
 
