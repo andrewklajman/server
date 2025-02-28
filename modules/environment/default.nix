@@ -66,6 +66,7 @@
     git
     ledger
     mpv
+    ncdu
     oxker
     qbittorrent
     ranger
