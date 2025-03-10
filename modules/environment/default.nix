@@ -1,5 +1,13 @@
 { config, pkgs, agenix, home-manager, nixvim, ... }:
 
+let 
+  twd = pkgs.writeShellScriptBin "twd" ''
+  time=$(date +%H%M)
+  description="$time TESTING $1"
+  task add $description project:health.diet
+  task $description done
+  '';
+in
 {
   imports = [ 
     agenix.nixosModules.default 
@@ -70,7 +78,7 @@
     oxker
     qbittorrent
     ranger
-    taskwarrior3 tasksh
+    taskwarrior3 tasksh twd
     yt-dlp
   ];
 
@@ -118,6 +126,7 @@ bindkey '^ ' autosuggest-accept
       '';
 
       shellAliases = {
+        led = "ledger -f main.txt --strict --pedantic --price-db prices.db --exchange $ --no-total";
         ll = "ls -l";
         lla = "ls -al";
         vi = "nvim";
