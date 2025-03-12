@@ -40,6 +40,7 @@
       cursorline = true;
       splitbelow = true;
       splitright = true;
+      wrap = false;
     };
 
     keymaps = [

@@ -1,11 +1,23 @@
 { config, pkgs, agenix, home-manager, nixvim, ... }:
 
 let 
+  twe = pkgs.writeShellScriptBin "twe" ''
+description="$(date +%H%M) $@"
+echo Description: $description
+task_id=$(task add "$description" project:health.exercise | cut -d' ' -f3 | cut -d'.' -f1)
+task $task_id done
+  '';
   twd = pkgs.writeShellScriptBin "twd" ''
-  time=$(date +%H%M)
-  description="$time TESTING $1"
-  task add $description project:health.diet
-  task $description done
+description="$(date +%H%M) $@"
+echo Description: $description
+task_id=$(task add "$description" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1)
+task $task_id done
+  '';
+  twl = pkgs.writeShellScriptBin "twl" ''
+description="$(date +%H%M) $@"
+echo Description: $description
+task_id=$(task add "$description" project:health.log | cut -d' ' -f3 | cut -d'.' -f1)
+task $task_id done
   '';
 in
 {
@@ -78,7 +90,7 @@ in
     oxker
     qbittorrent
     ranger
-    taskwarrior3 tasksh twd
+    taskwarrior3 tasksh twd twe twl 
     yt-dlp
   ];
 
