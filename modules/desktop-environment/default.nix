@@ -39,8 +39,10 @@ in
       (self: super: {
         st = super.st.overrideAttrs (oldAttrs: rec {
           patches = [ 
-            ./patch.st.1.catppuccin.mocha.diff
+#            ./patch.st.1.catppuccin.mocha.diff
 #            ./patch.st.2.font.source_code_pro.diff
+
+            ./patch.st.1.vimhelp.dark.diff
             ./patch.st.2.font.dejavumono.diff
           ];
         });
