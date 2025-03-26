@@ -27,10 +27,11 @@
     enable = true;
     script = ''
       ${pkgs.taskwarrior3}/bin/task add "Morning routine
-      * Coffee
-      * Stretching
       * Clean
-      * Breakfast" until:1400 rc.dateformat:HN +next
+      * Coffee
+      * Check tasks
+      * Stretching
+      * Shower" until:1400 rc.dateformat:HN +next
     '';
     serviceConfig = {
       Type = "oneshot";

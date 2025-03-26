@@ -1,24 +1,16 @@
 { config, pkgs, agenix, home-manager, nixvim, ... }:
 
 let 
-  twe = pkgs.writeShellScriptBin "twe" ''
-description="$(date +%H%M) $@"
-echo Description: $description
-task_id=$(task add "$description" project:health.exercise | cut -d' ' -f3 | cut -d'.' -f1)
-task $task_id done
-  '';
-  twd = pkgs.writeShellScriptBin "twd" ''
-description="$(date +%H%M) $@"
-echo Description: $description
-task_id=$(task add "$description" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1)
-task $task_id done
-  '';
-  twl = pkgs.writeShellScriptBin "twl" ''
-description="$(date +%H%M) $@"
-echo Description: $description
-task_id=$(task add "$description" project:health.log | cut -d' ' -f3 | cut -d'.' -f1)
-task $task_id done
-  '';
+  twe = pkgs.writeShellScriptBin "twe" '' task_id=$(task add "$@" project:health.exercise | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done '';
+  twl = pkgs.writeShellScriptBin "twl" '' task_id=$(task add "$@" project:health.log | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done '';
+  twd = pkgs.writeShellScriptBin "twd" '' task_id=$(task add "$@" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done '';
+  twdps = pkgs.writeShellScriptBin "twdps" '' task_id=$(twd "240 Protein Shake" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+  twdpos = pkgs.writeShellScriptBin "twdpos" '' task_id=$(twd "500 Protein Olive Oil Shake" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+  twdpms = pkgs.writeShellScriptBin "twdpms" '' task_id=$(twd "300 Protein Morning Shake" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+  twdc = pkgs.writeShellScriptBin "twdc" '' task_id=$(twd "0 Black coffee" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+  twdy = pkgs.writeShellScriptBin "twdy" '' task_id=$(twd "50 Yakult lite" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+  twdk = pkgs.writeShellScriptBin "twdk" '' task_id=$(twd "0 Kombucha" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+  twda = pkgs.writeShellScriptBin "twda" '' task_id=$(twd "50 Apple" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
 in
 {
   imports = [ 
@@ -30,7 +22,6 @@ in
         home-manager.users.andrew = import ./home-manager.andrew.nix;
     }
   ];
-
 
 # --------------------------------------------------------------------- #
 # ---- Global Configuration ------------------------------------------- #
@@ -73,11 +64,15 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [ 
     (pkgs.python3.withPackages (python-pkgs: with python-pkgs; [
-      pandas
-      requests
+      beautifulsoup4
+      jupyter-all
       matplotlib
+      pandas
       pygame
+      requests
+      selenium
     ]))
+    chromedriver
 
     alsa-utils
     arandr autorandr
@@ -90,8 +85,11 @@ in
     oxker
     qbittorrent
     ranger
-    taskwarrior3 tasksh twd twe twl 
+    taskwarrior3 tasksh twd twdps twdpos twdpms twdy twdc twdk twda
+    twe twl
     yt-dlp
+
+    vimPlugins.vimwiki
   ];
 
   environment = {
