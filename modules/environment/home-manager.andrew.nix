@@ -63,49 +63,8 @@
     ];
 
     plugins = {
-#      pkgs.vimPlugins.vimwiki;
-      fugitive.enable = true;
-      vimwiki.enable = true;
 #      vimwiki.enable = true;
-#      auto-pairs.enable = true;
-#      context-vim.enable = true;
-#      tabular.enable = true;
-#      vim-markdown.enable = true;
-#      vim-nix.enable = true;
     };
-
-#     extraPlugins = [
-# #      ( pkgs.vimUtils.buildVimPlugin {
-# #          name = "my-plugin";
-# #          src = pkgs.fetchFromGitHub {
-# #            owner = "<owner>";
-# #            repo = "<repo>";
-# #            rev = "<commit hash>";
-# #            hash = "<nix NAR hash>";
-# #          };
-# #        })
-# 
-# #      ( pkgs.vimUtils.buildVimPlugin {
-# #          name = "vim-easygrep";
-# #          src = pkgs.fetchFromGitHub {
-# #            owner = "dkprice";
-# #            repo = "vim-easygrep";
-# #            rev = "d0c36a77cc63c22648e792796b1815b44164653a";
-# #            hash = "sha256-bL33/S+caNmEYGcMLNCanFZyEYUOUmSsedCVBn4tV3g=";
-# #          };
-# #        })
-# 
-#       ( pkgs.vimUtils.buildVimPlugin {
-#           name = "vimwiki";
-#           src = pkgs.fetchFromGitHub {
-#             owner = "vimwiki";
-#             repo = "vimwiki";
-#             rev = "d0c36a77cc63c22648e792796b1815b44164653a";
-#             hash = "sha256-bL33/S+caNmEYGcMLNCanFZyEYUOUmSsedCVBn4tV3g=";
-#           };
-# fde35bb87e45abe930eebef5ab99a16289e53789
-#         })
-#     ];
 
   };
 
