@@ -11,6 +11,7 @@ let
   twdy = pkgs.writeShellScriptBin "twdy" '' task_id=$(twd "50 Yakult lite" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twdk = pkgs.writeShellScriptBin "twdk" '' task_id=$(twd "0 Kombucha" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twda = pkgs.writeShellScriptBin "twda" '' task_id=$(twd "50 Apple" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+  twdw = pkgs.writeShellScriptBin "twdw" '' task_id=$(twd "0 Water" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
 in
 {
   imports = [ 
@@ -85,8 +86,9 @@ in
     oxker
     qbittorrent
     ranger
-    taskwarrior3 tasksh twd twdps twdpos twdpms twdy twdc twdk twda
-    twe twl
+    taskwarrior3 
+      twd twda twdc twdk twdps twdpms twdpos twdw twdy 
+      twe twl
     yt-dlp
 
     vimPlugins.vimwiki
