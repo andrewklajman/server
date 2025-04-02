@@ -47,3 +47,14 @@ function! MarkdownLevel()
     endif
     return "=" 
 endfunction
+
+" gf alternative (open or create new link)
+autocmd BufEnter *.md inoremap <leader>wf <Esc>:call OCloneFile()<CR>
+function! OCloneFile()
+    normal viW"ay
+    if filereadable(@a)
+         execute('edit '..@a)
+    else
+         execute('new '..@a)
+    endif
+endfunction

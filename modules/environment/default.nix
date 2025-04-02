@@ -79,6 +79,7 @@ in
     arandr autorandr
     btop
     firefox ungoogled-chromium
+    fzf
     git
     ledger
     mpv
