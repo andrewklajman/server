@@ -15,6 +15,7 @@ set cursorline
 set splitbelow
 set splitright
 set nowrap
+colorscheme catppuccin-frappe
 
 " keymaps
 map <leader>l :Lexplore<CR>
@@ -58,3 +59,15 @@ function! OCloneFile()
          execute('new '..@a)
     endif
 endfunction
+
+" ctrl-p Setup
+autocmd BufEnter *.md nnoremap <leader>wcp :CtrlP /home/andrew/Documents/notes<CR>
+
+
+" Cycle through color
+let g:colors = getcompletion('', 'color')
+nnoremap <leader>cn :let next_color='colorscheme '..NextColors()<CR>:execute next_color<CR>:echo next_color<CR>
+func! NextColors()
+    let idx = index(g:colors, g:colors_name)
+    return (idx + 1 >= len(g:colors) ? g:colors[0] : g:colors[idx + 1])
+endfunc
