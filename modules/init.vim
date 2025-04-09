@@ -71,3 +71,10 @@ func! NextColors()
     let idx = index(g:colors, g:colors_name)
     return (idx + 1 >= len(g:colors) ? g:colors[0] : g:colors[idx + 1])
 endfunc
+
+" TaskWarrior notes
+au BufEnter *.md %!python3 scripts/task.py --update-task
+nnoremap <leader>tm :.!python3 scripts/task.py --modify-task<CR>
+nnoremap <leader>ta :.!python3 scripts/task.py --add-task<CR>
+nnoremap <leader>tu :%!python3 scripts/task.py --update-task<CR>
+
