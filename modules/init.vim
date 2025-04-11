@@ -15,7 +15,10 @@ set cursorline
 set splitbelow
 set splitright
 set nowrap
+set mouse=""
+set colorcolumn=90
 colorscheme catppuccin-frappe
+
 
 " keymaps
 map <leader>l :Lexplore<CR>
@@ -23,6 +26,7 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+nnoremap z<CR> z<CR>2k2j
 
 " Mardown folds
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
@@ -73,6 +77,7 @@ func! NextColors()
 endfunc
 
 " TaskWarrior notes
+" #au BufEnter *.md py print('test')
 au BufEnter *.md %!python3 scripts/task.py --update-task
 nnoremap <leader>tm :.!python3 scripts/task.py --modify-task<CR>
 nnoremap <leader>ta :.!python3 scripts/task.py --add-task<CR>
