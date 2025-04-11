@@ -17,6 +17,7 @@ set splitright
 set nowrap
 set mouse=""
 set colorcolumn=90
+set textwidth=80
 colorscheme catppuccin-frappe
 
 
