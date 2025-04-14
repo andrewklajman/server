@@ -6,19 +6,29 @@ let g:netrw_liststyle = 3
 let g:netrw_winsize = 20
 
 " options
+set autoindent
+set colorcolumn=90
+set cursorline
+set expandtab
+set mouse=""
+set nowrap
 set number
 set relativenumber
-set tabstop=5
 set shiftwidth=2
-set expandtab
-set cursorline
 set splitbelow
 set splitright
-set nowrap
-set mouse=""
-set colorcolumn=90
+set tabstop=2
 set textwidth=80
 colorscheme catppuccin-frappe
+
+" General folding functions
+set foldclose=all        " Close folds if you leave them in any way
+set foldcolumn=3         " Show the foldcolumn
+set foldenable           " Turn on folding
+set foldlevel=0          " Autofold everything by default
+"set foldmethod=syntax " Fold on the syntax
+set foldnestmax=1        " I only like to fold outer functions
+set foldopen=all         " Open folds if you touch them in any way
 
 " keymaps
 map <leader>l :Lexplore<CR>
@@ -77,7 +87,6 @@ endfunc
 
 " TaskWarrior tasks [ Modify, Add and Update tasks ]
 au BufEnter *.md %!python3 scripts/task.py --update-task
-nnoremap <leader>tm :.!python3 scripts/task.py --modify-task<CR>
 nnoremap <leader>ta :.!python3 scripts/task.py --add-task<CR>
 nnoremap <leader>tu :%!python3 scripts/task.py --update-task<CR>
 
