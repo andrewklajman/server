@@ -4,35 +4,28 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-# --- Additional Configuration ----------------------------------------- #
-  boot.initrd.luks.fido2Support = true;
-  boot.initrd.luks.devices."crypt".fido2.credential = "22311f06e96a0af6f92a8c63cab700e66741faf9acafb5eb11ad2f81912d7f393afb3b134ebf08ccccb971e814330ef7";
-  boot.initrd.luks.devices."crypt".fido2.passwordLess = true;
-# ---------------------------------------------------------------------- #
-
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/33f1ab1a-615d-450f-b4aa-a6159f429a7f";
+    { device = "/dev/disk/by-uuid/f77404b3-ed4e-497e-964b-6b1b593ba06e";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."crypt".device = "/dev/disk/by-uuid/48c65e73-fc34-4dc1-94a9-1af2e89dddf7";
-
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/0CC8-477B";
+    { device = "/dev/disk/by-uuid/12EE-24BE";
       fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/0e8d933a-ef24-48e4-86ff-2f64b199e6a0"; }
+    [ { device = "/dev/disk/by-uuid/f5609bdb-b678-4068-bf4b-cca705c3c490"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -43,6 +36,5 @@
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

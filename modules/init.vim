@@ -37,6 +37,9 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 nnoremap z<CR> z<CR>2k2j
+nnoremap <leader>g :w<CR>:!git add .<CR>q:1<C-W>_i!git commit -m ''<Esc>ha
+nnoremap <leader>wcp :CtrlP /home/andrew/Documents/notes<CR>
+nnoremap <leader>gt :!python3 /home/andrew/Documents/notes/scripts/open-document-issues.py<CR>
 
 " Mardown folds
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
@@ -74,8 +77,6 @@ function! OCloneFile()
     endif
 endfunction
 
-" ctrl-p Setup
-autocmd BufEnter *.md nnoremap <leader>wcp :CtrlP /home/andrew/Documents/notes<CR>
 
 " Cycle through color
 let g:colors = getcompletion('', 'color')
@@ -86,16 +87,23 @@ func! NextColors()
 endfunc
 
 " TaskWarrior tasks [ Modify, Add and Update tasks ]
-au BufEnter *.md %!python3 scripts/task.py --update-task
 nnoremap <leader>ta :.!python3 scripts/task.py --add-task<CR>
 nnoremap <leader>tu :%!python3 scripts/task.py --update-task<CR>
+au BufEnter * call TaskUpdate()
+function! TaskUpdate()
+  if getcwd() == '/home/andrew/Documents/notes'
+    %!python3 scripts/task.py --update-task
+  endif
+endfunction
 
 " TaskWarrior reports [ Auto generate reports in taskreprots/ ]
 autocmd BufEnter ~/Documents/notes/taskreports/*.report call TaskReport()
 function! TaskReport()
-   normal ggdG
-   execute('r!python3 scripts/task_report.py '..expand('%:t:r'))
-   w
+  if getcwd() == '/home/andrew/Documents/notes'
+    normal ggdG
+    execute('r!python3 scripts/task_report.py '..expand('%:t:r'))
+    w
+  endif
 endfunction
 
 " init.vim folds
@@ -117,3 +125,4 @@ function! PythonDefLevel()
     endif
     return "=" 
 endfunction
+

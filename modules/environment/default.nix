@@ -12,6 +12,10 @@ let
   twdk = pkgs.writeShellScriptBin "twdk" '' task_id=$(twd "0 Kombucha" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twda = pkgs.writeShellScriptBin "twda" '' task_id=$(twd "50 Apple" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twdw = pkgs.writeShellScriptBin "twdw" '' task_id=$(twd "0 Water" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+
+  journal = pkgs.writeShellScriptBin "journal" '' 
+  python3 /home/andrew/Documents/notes/scripts/generate_journal.py >> /home/andrew/Documents/journal.md
+  ''; 
 in
 {
   imports = [ 
@@ -28,13 +32,8 @@ in
 # ---- Global Configuration ------------------------------------------- #
 # --------------------------------------------------------------------- #
 
-#  # Enable the X11 windowing system.
-#  services.xserver.enable = true;
-#  # Enable the GNOME Desktop Environment.
-#  services.xserver.displayManager.gdm.enable = true;
-#  services.xserver.desktopManager.gnome.enable = true;
-
   dwm.enable = true;
+  mullvad.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -44,6 +43,22 @@ in
   };
 
   time.timeZone = "Australia/Sydney";
+
+  security.sudo = {
+    enable = true;
+    extraRules = [{
+      groups = [ "wheel" ];
+      commands = [
+        {
+          command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }];
+  };
+
+
+
 
   # Reducing disk space usage
       boot.loader.systemd-boot.configurationLimit = 10;
@@ -81,9 +96,11 @@ in
     firefox ungoogled-chromium
     fzf
     git
+    journal
     ledger
     mpv
     ncdu
+    nixos-rebuild
     oxker
     qbittorrent
     ranger
@@ -140,8 +157,9 @@ bindkey '^ ' autosuggest-accept
 
       shellAliases = {
         led = "ledger -f main.txt --strict --pedantic --price-db prices.db --exchange $ --no-total";
-        ll = "ls -l";
-        lla = "ls -al";
+        llol = "ls -1 --group-directories-first";
+        ll = "ls -l --group-directories-first";
+        lla = "ls -al --group-directories-first";
         vi = "nvim";
         vim = "nvim";
         nr = "nixos-rebuild switch --flake ./#pc";
