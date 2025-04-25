@@ -13,6 +13,7 @@
     ./neovim.nix
     ./password-manager.nix
     ./qbittorrent-nox
+    ./systemd-journal.nix
     ./tailscale
    #./tor.nix
     ./virt-manager.nix

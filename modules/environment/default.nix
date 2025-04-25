@@ -34,6 +34,8 @@ in
 
   dwm.enable = true;
   mullvad.enable = true;
+  systemd-journal.enable = true;
+  networking.enableIPv6 = false;
 
   services.pipewire = {
     enable = true;
