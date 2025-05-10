@@ -7,7 +7,8 @@
     systemd.timers."generate-journal" = {
       wantedBy = [ "timers.target" ];
         timerConfig = {
-          OnCalendar = "*-*-* 05:00:00";
+          #OnCalendar = "*:5/10";
+          OnCalendar = "daily";
           Persistent = "true";
           Unit = "generate-journal.service";
         };

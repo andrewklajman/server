@@ -66,16 +66,16 @@ function! MarkdownLevel()
     return "=" 
 endfunction
 
-" gf alternative (open or create new link)
-autocmd BufEnter *.md inoremap <leader>wf <Esc>:call OCloneFile()<CR>
-function! OCloneFile()
-    normal viW"ay
-    if filereadable(@a)
-         execute('edit '..@a)
-    else
-         execute('new '..@a)
-    endif
-endfunction
+" " gf alternative (open or create new link)
+" autocmd BufEnter *.md inoremap <leader>wf <Esc>:call OCloneFile()<CR>
+" function! OCloneFile()
+"     normal viW"ay
+"     if filereadable(@a)
+"          execute('edit '..@a)
+"     else
+"          execute('new '..@a)
+"     endif
+" endfunction
 
 
 " Cycle through color
@@ -89,26 +89,26 @@ endfunc
 " TaskWarrior tasks [ Modify, Add and Update tasks ]
 nnoremap <leader>ta :.!python3 scripts/task.py --add-task<CR>
 nnoremap <leader>tu :%!python3 scripts/task.py --update-task<CR>
-au BufEnter * call TaskUpdate()
+au BufEnter *.md call TaskUpdate()
 function! TaskUpdate()
   if getcwd() == '/home/andrew/Documents/notes'
     %!python3 scripts/task.py --update-task
   endif
 endfunction
 
-" TaskWarrior reports [ Auto generate reports in taskreprots/ ]
-autocmd BufEnter ~/Documents/notes/taskreports/*.report call TaskReport()
-function! TaskReport()
-  if getcwd() == '/home/andrew/Documents/notes'
-    normal ggdG
-    execute('r!python3 scripts/task_report.py '..expand('%:t:r'))
-    w
-  endif
-endfunction
+" " TaskWarrior reports [ Auto generate reports in taskreprots/ ]
+" autocmd BufEnter ~/Documents/notes/taskreports/*.report call TaskReport()
+" function! TaskReport()
+"   if getcwd() == '/home/andrew/Documents/notes'
+"     normal ggdG
+"     execute('r!python3 scripts/task_report.py '..expand('%:t:r'))
+"     w
+"   endif
+" endfunction
 
 " init.vim folds
-au BufEnter init.vim setlocal foldexpr=InitVimLevel()  
-au BufEnter init.vim setlocal foldmethod=expr   
+autocmd BufEnter init.vim setlocal foldexpr=InitVimLevel()  
+autocmd BufEnter init.vim setlocal foldmethod=expr   
 function! InitVimLevel()
     if getline(v:lnum) =~ '^" .*$'
         return ">1"
@@ -117,12 +117,26 @@ function! InitVimLevel()
 endfunction
 
 " Python Folding on functions
-au BufEnter *.py setlocal foldexpr=PythonDefLevel()  
-au BufEnter *.py setlocal foldmethod=expr   
+autocmd BufEnter *.py setlocal foldexpr=PythonDefLevel()  
+autocmd BufEnter *.py setlocal foldmethod=expr   
 function! PythonDefLevel()
     if getline(v:lnum) =~ '^def .*$'
         return ">1"
     endif
     return "=" 
 endfunction
+
+" Documents/notes
+if getcwd() == '/home/andrew/Documents/notes'
+
+" ./reports/task-by-tag
+  autocmd BufEnter **/reports/tasks-by-tag call Tasks_by_tag()
+  function! Tasks_by_tag()
+    normal ggdG
+    execute "r!./scripts/tasks-by-tag.sh"
+    execute "write"
+    normal gg
+  endfunction
+
+endif
 

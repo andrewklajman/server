@@ -9,6 +9,8 @@ let
   twdpms = pkgs.writeShellScriptBin "twdpms" '' task_id=$(twd "300 Protein Morning Shake" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twdc = pkgs.writeShellScriptBin "twdc" '' task_id=$(twd "0 Black coffee" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twdy = pkgs.writeShellScriptBin "twdy" '' task_id=$(twd "50 Yakult lite" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+  twdyo = pkgs.writeShellScriptBin "twdyo" '' task_id=$(twd "700 Yakult lite w olive oil" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+  twdyho = pkgs.writeShellScriptBin "twdyho" '' task_id=$(twd "380 Yakult lite w half olive oil" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twdk = pkgs.writeShellScriptBin "twdk" '' task_id=$(twd "0 Kombucha" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twda = pkgs.writeShellScriptBin "twda" '' task_id=$(twd "50 Apple" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twdw = pkgs.writeShellScriptBin "twdw" '' task_id=$(twd "0 Water" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
@@ -95,6 +97,7 @@ in
     alsa-utils
     arandr autorandr
     btop
+    cups-pdf-to-pdf
     firefox ungoogled-chromium
     fzf
     git
@@ -107,7 +110,7 @@ in
     qbittorrent
     ranger
     taskwarrior3 
-      twd twda twdc twdk twdps twdpms twdpos twdw twdy 
+      twd twda twdc twdk twdps twdpms twdpos twdw twdy twdyo twdyho
       twe twl
     yt-dlp
 
@@ -142,7 +145,14 @@ in
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       autosuggestions.enable = true;
-      interactiveShellInit = '' bindkey '^ ' autosuggest-accept '';
+
+      interactiveShellInit = '' 
+bindkey '^ ' autosuggest-accept 
+task zshrc
+'';
+# Side by side output:
+#   paste <(awk '{printf %-63sn, $0}' taskoutput) vebu
+#   tput cols / lines >> terminal dimensions
 
       promptInit = ''
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
