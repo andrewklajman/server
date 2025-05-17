@@ -38,8 +38,6 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 nnoremap z<CR> z<CR>2k2j
 nnoremap <leader>g :w<CR>:!git add .<CR>q:1<C-W>_i!git commit -m ''<Esc>ha
-nnoremap <leader>wcp :CtrlP /home/andrew/Documents/notes<CR>
-nnoremap <leader>gt :!python3 /home/andrew/Documents/notes/scripts/open-document-issues.py<CR>
 
 " Mardown folds
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
@@ -86,16 +84,6 @@ func! NextColors()
     return (idx + 1 >= len(g:colors) ? g:colors[0] : g:colors[idx + 1])
 endfunc
 
-" TaskWarrior tasks [ Modify, Add and Update tasks ]
-nnoremap <leader>ta :.!python3 scripts/task.py --add-task<CR>
-nnoremap <leader>tu :%!python3 scripts/task.py --update-task<CR>
-au BufEnter *.md call TaskUpdate()
-function! TaskUpdate()
-  if getcwd() == '/home/andrew/Documents/notes'
-    %!python3 scripts/task.py --update-task
-  endif
-endfunction
-
 " " TaskWarrior reports [ Auto generate reports in taskreprots/ ]
 " autocmd BufEnter ~/Documents/notes/taskreports/*.report call TaskReport()
 " function! TaskReport()
@@ -126,8 +114,11 @@ function! PythonDefLevel()
     return "=" 
 endfunction
 
-" Documents/notes
+" Documents/notes vim file
 if getcwd() == '/home/andrew/Documents/notes'
+
+  nnoremap <leader>wcp :CtrlP /home/andrew/Documents/notes<CR>
+  nnoremap <leader>gt :!python3 /home/andrew/Documents/notes/scripts/open-document-issues.py<CR>
 
 " ./reports/task-by-tag
   autocmd BufEnter **/reports/tasks-by-tag call Tasks_by_tag()
@@ -136,6 +127,16 @@ if getcwd() == '/home/andrew/Documents/notes'
     execute "r!./scripts/tasks-by-tag.sh"
     execute "write"
     normal gg
+  endfunction
+
+  " TaskWarrior tasks [ Modify, Add and Update tasks ]
+  nnoremap <leader>ta :.!python3 scripts/task.py --add-task<CR>
+  nnoremap <leader>tu :%!python3 scripts/task.py --update-task<CR>
+  autocmd BufEnter *.md call TaskUpdate()
+  function! TaskUpdate()
+    if getcwd() == '/home/andrew/Documents/notes'
+      %!python3 scripts/task.py --update-task
+    endif
   endfunction
 
 endif

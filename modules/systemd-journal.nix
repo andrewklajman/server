@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }:
-
+https://www.reddit.com/r/NixOS/comments/1kope9g/problem_with_running_a_systemd_service_running_a/
 {
   options.systemd-journal.enable = lib.mkEnableOption "systemd-journal";
 
@@ -14,9 +14,9 @@
         };
     };
     
-  # ${pkgs.bash}/bin/bash -lc ${pkgs.python3}/bin/python3 /home/andrew/Documents/notes/scripts/generate_journal.py >> /home/andrew/Documents/notes/journal.md
-        #${pkgs.python3}/bin/python3 /home/andrew/Documents/notes/scripts/generate_journal.py
-        #
+# https://www.reddit.com/r/NixOS/comments/1kope9g/problem_with_running_a_systemd_service_running_a/
+# ${pkgs.python3}/bin/python3 /home/andrew/Documents/notes/scripts/journal.py
+
     systemd.services."generate-journal" = {
       enable = true;
       script = ''

@@ -3,6 +3,7 @@
 let 
   twe = pkgs.writeShellScriptBin "twe" '' task_id=$(task add "$@" project:health.exercise | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done '';
   twl = pkgs.writeShellScriptBin "twl" '' task_id=$(task add "$@" project:health.log | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done '';
+  twlp = pkgs.writeShellScriptBin "twlp" '' task_id=$(task add "$@" project:health.log | cut -d' ' -f3 | cut -d'.' -f1) +private; task $task_id done '';
   twd = pkgs.writeShellScriptBin "twd" '' task_id=$(task add "$@" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done '';
   twdps = pkgs.writeShellScriptBin "twdps" '' task_id=$(twd "240 Protein Shake" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twdpos = pkgs.writeShellScriptBin "twdpos" '' task_id=$(twd "500 Protein Olive Oil Shake" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
@@ -96,6 +97,7 @@ in
 
     alsa-utils
     arandr autorandr
+    blender
     btop
     cups-pdf-to-pdf
     firefox ungoogled-chromium
@@ -111,7 +113,7 @@ in
     ranger
     taskwarrior3 
       twd twda twdc twdk twdps twdpms twdpos twdw twdy twdyo twdyho
-      twe twl
+      twe twl twlp
     yt-dlp
 
     vimPlugins.vimwiki
