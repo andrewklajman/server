@@ -1,23 +1,23 @@
 { config, pkgs, lib, ... }:
-https://www.reddit.com/r/NixOS/comments/1kope9g/problem_with_running_a_systemd_service_running_a/
+# https://www.reddit.com/r/NixOS/comments/1kope9g/problem_with_running_a_systemd_service_running_a/
 {
   options.systemd-journal.enable = lib.mkEnableOption "systemd-journal";
 
   config = lib.mkIf config.systemd-journal.enable {
-    systemd.timers."generate-journal" = {
+    systemd.timers."systemd-journal" = {
       wantedBy = [ "timers.target" ];
         timerConfig = {
           #OnCalendar = "*:5/10";
           OnCalendar = "daily";
           Persistent = "true";
-          Unit = "generate-journal.service";
+          Unit = "systemd-journal.service";
         };
     };
     
 # https://www.reddit.com/r/NixOS/comments/1kope9g/problem_with_running_a_systemd_service_running_a/
 # ${pkgs.python3}/bin/python3 /home/andrew/Documents/notes/scripts/journal.py
 
-    systemd.services."generate-journal" = {
+    systemd.services."systemd-journal" = {
       enable = true;
       script = ''
         ${pkgs.git}/bin/git -C /home/andrew/Documents/notes add .

@@ -14,6 +14,7 @@
     ./password-manager.nix
     ./qbittorrent-nox
     ./systemd-journal.nix
+    ./systemd-recur-task.nix
     ./tailscale
    #./tor.nix
     ./virt-manager.nix

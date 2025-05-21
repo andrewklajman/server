@@ -38,6 +38,7 @@ in
   dwm.enable = true;
   mullvad.enable = true;
   systemd-journal.enable = true;
+  systemd-recur-task.enable = true;
   networking.enableIPv6 = false;
 
   services.pipewire = {
