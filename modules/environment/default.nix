@@ -41,6 +41,8 @@ in
   systemd-recur-task.enable = true;
   networking.enableIPv6 = false;
 
+  nixpkgs.config.allowUnfree = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -97,6 +99,7 @@ in
     chromedriver
 
     alsa-utils
+    android-studio
     arandr autorandr
     blender
     btop

@@ -9,32 +9,27 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-        url = "github:nix-community/nixvim";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = { self, nixpkgs, agenix, home-manager, nixvim, ... }@inputs: {
     nixosConfigurations.lenovo = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit agenix home-manager nixvim;  };
+      specialArgs = { inherit agenix home-manager nixvim; };
       modules = [
         ./hosts/lenovo/configuration.nix
         ./modules
-#	{
-#          services.mullvad-vpn = {
-#	    enable = true;
-#	  };
-#	}
       ];
     };
 
     nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit agenix home-manager;  };
+      specialArgs = { inherit agenix home-manager nixvim; };
       modules = [
         ./hosts/pc/configuration.nix
-    	./modules
+    	  ./modules
       ];
     };
 
@@ -43,7 +38,7 @@
       specialArgs = { inherit agenix home-manager;  };
       modules = [ 
         ./hosts/server/configuration.nix
-	./modules
+	      ./modules
       ];
     };
   };
