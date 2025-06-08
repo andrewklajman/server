@@ -40,6 +40,8 @@ in
   networking.enableIPv6 = false;
   virt-manager.enable = true;
 
+  nixpkgs.config.allowUnfree = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -97,6 +99,7 @@ in
     chromedriver
 
     alsa-utils
+    android-studio
     arandr autorandr
     blender
     btop

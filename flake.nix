@@ -17,20 +17,15 @@
       modules = [
         ./hosts/lenovo/configuration.nix
         ./modules
-#	{
-#          services.mullvad-vpn = {
-#	    enable = true;
-#	  };
-#	}
       ];
     };
 
     nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit agenix home-manager;  };
+      specialArgs = { inherit agenix home-manager nixvim; };
       modules = [
         ./hosts/pc/configuration.nix
-    	./modules
+    	  ./modules
       ];
     };
 
@@ -39,7 +34,7 @@
       specialArgs = { inherit agenix home-manager;  };
       modules = [ 
         ./hosts/server/configuration.nix
-	./modules
+	      ./modules
       ];
     };
   };
