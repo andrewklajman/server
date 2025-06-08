@@ -22,7 +22,7 @@
 
     nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit agenix home-manager nixvim; };
+      specialArgs = { inherit agenix home-manager; };
       modules = [
         ./hosts/pc/configuration.nix
     	  ./modules
