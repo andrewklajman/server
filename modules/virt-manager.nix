@@ -6,7 +6,7 @@
 
   config = lib.mkIf config.virt-manager.enable { 
     programs.virt-manager.enable = true;
-    users.groups.libvirtd.members = ["andrew"];
+    users.groups.libvirtd.members = [ "andrew" ];
     virtualisation.libvirtd.enable = true;
     virtualisation.spiceUSBRedirection.enable = true;
   };

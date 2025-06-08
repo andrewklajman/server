@@ -1,4 +1,4 @@
-{ config, pkgs, agenix, home-manager, nixvim, ... }:
+{ config, pkgs, agenix, home-manager, ... }:
 
 let 
   twe = pkgs.writeShellScriptBin "twe" '' task_id=$(task add "$@" project:health.exercise | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done '';
@@ -15,10 +15,9 @@ let
   twdk = pkgs.writeShellScriptBin "twdk" '' task_id=$(twd "0 Kombucha" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twda = pkgs.writeShellScriptBin "twda" '' task_id=$(twd "50 Apple" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
   twdw = pkgs.writeShellScriptBin "twdw" '' task_id=$(twd "0 Water" project:health.diet | cut -d' ' -f3 | cut -d'.' -f1); task $task_id done ''; 
+  journal = pkgs.writeShellScriptBin "journal" '' bash /home/andrew/Documents/notes/scripts/jw.sh''; 
+  exercise = pkgs.writeShellScriptBin "exercise" '' bash /home/andrew/Documents/notes/scripts/exercise.sh''; 
 
-  journal = pkgs.writeShellScriptBin "journal" '' 
-  python3 /home/andrew/Documents/notes/scripts/generate_journal.py >> /home/andrew/Documents/journal.md
-  ''; 
 in
 {
   imports = [ 
@@ -26,7 +25,6 @@ in
     home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = {inherit nixvim;};
         home-manager.users.andrew = import ./home-manager.andrew.nix;
     }
   ];
@@ -40,6 +38,7 @@ in
   systemd-journal.enable = true;
   systemd-recur-task.enable = true;
   networking.enableIPv6 = false;
+  virt-manager.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -93,6 +92,7 @@ in
       pygame
       requests
       selenium
+      yfinance curl-cffi
     ]))
     chromedriver
 
@@ -104,8 +104,8 @@ in
     firefox ungoogled-chromium
     fzf
     git
-    journal
     ledger
+    light
     mpv
     ncdu
     nixos-rebuild
@@ -115,9 +115,11 @@ in
     taskwarrior3 
       twd twda twdc twdk twdps twdpms twdpos twdw twdy twdyo twdyho
       twe twl twlp
+    journal exercise
     yt-dlp
 
     vimPlugins.vimwiki
+    zenity
   ];
 
   environment = {

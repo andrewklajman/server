@@ -1,4 +1,6 @@
 { config, pkgs, lib, ... }:
+# https://nixalted.com/
+# https://github.com/Gako358/neovim/blob/main/flake.nix
 
 {
 
@@ -6,23 +8,15 @@
     enable = true;
     defaultEditor = true;
     configure = {
-    	 customRC = lib.fileContents ./init.vim;
+      customRC = lib.fileContents ./init.vim;
       packages.myVimPackage = with pkgs.vimPlugins; {
         start = [ 
-#          lazy-nvim
-          ctrlp-vim            # https://github.com/ctrlpvim/ctrlp.vim/
           catppuccin-nvim     # https://github.com/catppuccin/nvim/
-          vim-fugitive        # Git management
         ];
         opt = [ ];
       }; 
     };
     withNodeJs = true;
   };
-
-# https://nixalted.com/
-
-
-
 
 }

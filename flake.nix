@@ -8,16 +8,12 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-        url = "github:nix-community/nixvim";
-        inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, agenix, home-manager, nixvim, ... }@inputs: {
+  outputs = { self, nixpkgs, agenix, home-manager, ... }@inputs: {
     nixosConfigurations.lenovo = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit agenix home-manager nixvim;  };
+      specialArgs = { inherit agenix home-manager ;  };
       modules = [
         ./hosts/lenovo/configuration.nix
         ./modules

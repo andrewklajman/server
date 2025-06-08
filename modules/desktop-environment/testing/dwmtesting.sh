@@ -5,4 +5,5 @@ cd dwm-6.5
 
 patch < ../../patch.dwm.1.center.diff
 patch < ../../patch.dwm.2.switchtotag.diff
-patch < ../../patch.dwm.3.config.def.h.diff
+#patch < ../../patch.dwm.3.config.def.h.diff
+#patch < ../../patch.dwm.4.config.def.h.diff

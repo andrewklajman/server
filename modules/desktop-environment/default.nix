@@ -50,7 +50,7 @@ in
           buildInputs = oldAttrs.buildInputs ++ [ pkgs.xorg.libXext ];
           patches = [ 
             ./patch.dwm.2.switchtotag.diff
-            ./patch.dwm.3.config.def.h.diff
+            ./patch.dwm.5.config.def.h.diff
           ];
         });
       })
