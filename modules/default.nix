@@ -13,11 +13,13 @@
     ./neovim.nix
     ./password-manager.nix
     ./qbittorrent-nox
+    ./rustDev.nix
     ./systemd-journal.nix
     ./systemd-recur-task.nix
     ./tailscale
    #./tor.nix
     ./virt-manager.nix
+
   ];
 
 }

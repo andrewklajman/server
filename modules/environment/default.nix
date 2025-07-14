@@ -83,6 +83,9 @@ in
     customPaneNavigationAndResize = true;
   };
 
+  virtualisation.docker.enable = true;
+  users.users.andrew.extraGroups = [ "docker" ];
+
   networking.networkmanager.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [ 
@@ -104,9 +107,11 @@ in
     blender
     btop
     cups-pdf-to-pdf
+    # docker
     firefox ungoogled-chromium
     fzf
     git
+    jq
     ledger
     light
     mpv
