@@ -4,26 +4,33 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     agenix.url = "github:ryantm/agenix";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, agenix, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, agenix, ... }@inputs: {
     nixosConfigurations.lenovo = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit agenix home-manager ;  };
+      specialArgs = { inherit agenix; };
       modules = [
         ./hosts/lenovo/configuration.nix
         ./modules
-        ({ config, ... }: { rustDev.enable = true; })
+        ( { config, ... }: { 
+            dwm.enable                = true;
+            doas.enable               = true;
+            docker.enable             = true;
+            gnupg.enable              = true;
+            mullvad.enable            = true;
+            systemd-journal.enable    = true;
+            systemd-recur-task.enable = true;
+            tmux.enable               = false;
+            virt-manager.enable       = true;
+            zsh.enable                = true;
+          })
       ];
     };
 
     nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit agenix home-manager; };
+      specialArgs = { inherit agenix; };
       modules = [
         ./hosts/pc/configuration.nix
     	  ./modules
@@ -32,7 +39,7 @@
 
     nixosConfigurations.server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit agenix home-manager;  };
+      specialArgs = { inherit agenix; };
       modules = [ 
         ./hosts/server/configuration.nix
 	      ./modules

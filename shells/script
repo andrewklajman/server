@@ -1,0 +1,2 @@
+echo test
+export PS1='demo$ '

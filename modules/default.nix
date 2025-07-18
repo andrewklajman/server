@@ -1,26 +1,27 @@
 { config, pkgs, lib, ... }:
-
 {
   imports = [
     ./agenix
     ./audiobookshelf
     ./calibre.nix
     ./desktop-environment
-    ./environment
+    ./doas.nix
+    ./docker.nix
+    ./environment.nix
+    ./gnupg.nix
     ./metube
     ./microsocks.nix
     ./mullvad.nix
     ./neovim.nix
     ./password-manager.nix
-    ./qbittorrent-nox
-    ./rustDev.nix
+    ./qbittorrent.nix
     ./systemd-journal.nix
     ./systemd-recur-task.nix
     ./tailscale
-   #./tor.nix
+    ./taskwarrior.nix
+    ./tmux.nix
     ./virt-manager.nix
-
+    ./zsh.nix
   ];
-
 }
 
