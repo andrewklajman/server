@@ -2,12 +2,13 @@
 
 let
   cfg = config.services.mullvad-vpn;
-#  mullvadSettingsDir = "/home/andrew/server/modules/mullvad/MULLVAD_SETTINGS_DIR";
-  mullvadSettingsDir = "/home/andrew/Documents/notes/MULLVAD_SETTINGS_DIR";
 in
 with lib;
 {
-  options.mullvad.enable = lib.mkEnableOption "mullvad";
+  options.mullvad = {
+    enable = lib.mkEnableOption "mullvad";
+    mullvadSettingsDir = lib.mkOption { type = lib.types.str; };
+  };
 
   config = lib.mkIf config.mullvad.enable {
     boot.kernelModules = [ "tun" ];
@@ -28,9 +29,7 @@ with lib;
       startLimitBurst = 5;
       startLimitIntervalSec = 20;
       serviceConfig = {
-        # Environment = '' "MULLVAD_SETTINGS_DIR=${./MULLVAD_SETTINGS_DIR}" '';
-        # Environment = '' "MULLVAD_SETTINGS_DIR=/home/andrew/server/modules/mullvad/MULLVAD_SETTINGS_DIR" '';
-        Environment = '' "MULLVAD_SETTINGS_DIR=${mullvadSettingsDir}" '';
+        Environment = '' "MULLVAD_SETTINGS_DIR=${config.mullvad.mullvadSettingsDir}" '';
         ExecStart = "${cfg.package}/bin/mullvad-daemon -v --disable-stdout-timestamps";
         Restart = "always";
         RestartSec = 1;

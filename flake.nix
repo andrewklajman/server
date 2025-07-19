@@ -18,7 +18,10 @@
             doas.enable               = true;
             docker.enable             = true;
             gnupg.enable              = true;
-            mullvad.enable            = true;
+            mullvad = { 
+              enable = true; 
+              mullvadSettingsDir = "/home/andrew/Documents/notes/MULLVAD_SETTINGS_DIR";
+            };
             systemd-journal.enable    = true;
             systemd-recur-task.enable = true;
             tmux.enable               = false;
