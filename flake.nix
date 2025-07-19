@@ -14,7 +14,7 @@
         ./hosts/lenovo/configuration.nix
         ./modules
         ( { config, ... }: { 
-            dwm.enable                = true;
+            desktop-manager           = "dwm";
             doas.enable               = true;
             docker.enable             = true;
             gnupg.enable              = true;
