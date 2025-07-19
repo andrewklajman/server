@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   # Users
   users.users.andrew = {
@@ -47,7 +46,7 @@
     ranger
     yt-dlp
     cups-pdf-to-pdf
-    firefox ungoogled-chromium
+    ungoogled-chromium
     ledger
   ];
 
@@ -65,5 +64,4 @@
     man.enable = true;
     dev.enable = true;
   };
-
 }
