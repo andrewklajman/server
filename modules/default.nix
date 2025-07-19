@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./agenix
     ./audiobookshelf
     ./calibre.nix
     ./desktop-environment

@@ -1,9 +1,6 @@
-#{ config, pkgs, agenix, home-manager, ... }:
-{ config, pkgs, agenix, ... }:
+{ config, pkgs, ... }:
 
 {
-  imports = [ agenix.nixosModules.default ];
-
   # Users
   users.users.andrew = {
     isNormalUser = true;
