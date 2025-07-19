@@ -12,6 +12,7 @@ in
     pass
     xclip
     passmenulogin 
+    tabbed
   ];
   
   services = {

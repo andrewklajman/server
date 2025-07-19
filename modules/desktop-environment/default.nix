@@ -4,7 +4,7 @@ let
   is_dwm = ( config.desktop-manager == "dwm" );
   is_gnome = ( config.desktop-manager == "gnome" );
   module_dwm = (import ./dwm { inherit config lib pkgs; } );
-  module_gnome = (import ./gnome { inherit config lib pkgs; } );
+  module_gnome = (import ./gnome.nix { inherit config lib pkgs; } );
 in
 {
   options.desktop-manager = lib.mkOption {
