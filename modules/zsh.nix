@@ -11,9 +11,9 @@
       autosuggestions.enable = true;
     };
 
+#   task zshrc Needed when implementing taskwarrior
     programs.zsh.interactiveShellInit = '' 
         bindkey '^ ' autosuggest-accept 
-        task zshrc
     '';
 
     programs.zsh.promptInit = ''
