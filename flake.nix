@@ -12,6 +12,7 @@
         ./hosts/lenovo/configuration.nix
         ./modules
         ( { config, ... }: { 
+            audiobookshelf.enable     = true; 
             desktop-manager           = "dwm";
             doas.enable               = true;
             docker.enable             = false;

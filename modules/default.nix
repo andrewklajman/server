@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./audiobookshelf
+    ./audiobookshelf.nix
     ./calibre.nix
     ./desktop-environment
     ./doas.nix

@@ -1,6 +1,9 @@
 # https://www.reddit.com/r/NixOS/comments/1m2kp4s/how_to_specify_zshrc_when_running_via_nixshell/
 let
   pkgs = import <nixpkgs> { };
+  audiobookshelf = pkgs.mkShell {
+    packages = [ pkgs.audiobookshelf ];
+  };
   python = pkgs.mkShell {
     packages = [
       (pkgs.python3.withPackages (python-pkgs: [
@@ -16,13 +19,14 @@ let
     ];
   };
   rust = pkgs.mkShell {
-    packages = [ 
-      pkgs.cargo 
-      pkgs.rustc 
-    ];
+    packages = [ pkgs.cargo pkgs.rustc ];
   };
+
 in
 {
-  inherit rust python;
+  inherit 
+    audiobookshelf
+    python 
+    rust;
 }
   
