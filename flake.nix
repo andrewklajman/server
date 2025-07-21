@@ -24,7 +24,7 @@
             systemd-journal.enable    = false;
             systemd-recur-task.enable = false;
             tmux.enable               = false;
-            virt-manager.enable       = false;
+            virt-manager.enable       = true;
             zsh.enable                = true;
           })
       ];

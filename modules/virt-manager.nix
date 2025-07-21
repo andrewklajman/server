@@ -7,7 +7,13 @@
   config = lib.mkIf config.virt-manager.enable { 
     programs.virt-manager.enable = true;
     users.groups.libvirtd.members = [ "andrew" ];
-    virtualisation.libvirtd.enable = true;
-    virtualisation.spiceUSBRedirection.enable = true;
+    virtualisation = {
+      libvirtd.enable = true;
+      spiceUSBRedirection.enable = true;
+    };
+    services = {
+      qemuGuest.enable = true;
+      spice-vdagentd.enable = true;
+    };
   };
 }
