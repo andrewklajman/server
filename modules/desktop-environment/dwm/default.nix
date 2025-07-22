@@ -1,15 +1,10 @@
 { config, lib, pkgs, ... }:
 
-let
-  passmenulogin = pkgs.writeShellScriptBin "passmenulogin" '' ${builtins.readFile ./passmenulogin} '';
-  is_dwm = ( config.desktop-manager == "dwm" );
-in
 {
   fonts.packages = with pkgs; [ source-code-pro font-awesome ];
   environment.systemPackages = with pkgs; [ 
     dmenu 
     st tabbed
-    pass passmenulogin 
     xclip
   ];
 

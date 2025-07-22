@@ -1,9 +1,6 @@
 {
   description = "System Configuration";
-
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-  };
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
   outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations.lenovo = nixpkgs.lib.nixosSystem {
@@ -21,6 +18,7 @@
               enable = true; 
               mullvadSettingsDir = "/home/andrew/Documents/notes/MULLVAD_SETTINGS_DIR";
             };
+            pass.enable               = true;
             systemd-journal.enable    = false;
             systemd-recur-task.enable = false;
             tmux.enable               = false;

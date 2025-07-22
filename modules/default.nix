@@ -8,11 +8,12 @@
     ./docker.nix
     ./environment.nix
     ./gnupg.nix
-    ./metube
+    ./metubel.nix
     ./microsocks.nix
     ./mullvad.nix
     ./neovim.nix
     ./password-manager.nix
+    ./pass
     ./qbittorrent.nix
     ./systemd-journal.nix
     ./systemd-recur-task.nix
