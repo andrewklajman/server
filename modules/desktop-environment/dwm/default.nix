@@ -12,6 +12,15 @@ in
     pass passmenulogin 
     xclip
   ];
+
+  nixpkgs.overlays = [
+    (self: super: {
+      dwm = super.dwm.overrideAttrs (oldAttrs: rec {
+        buildInputs = oldAttrs.buildInputs ++ [ pkgs.xorg.libXext ];
+        patches = [ ./patch.dwm.7.config.def.h.diff ];
+      });
+    })
+  ];
   
   services = {
     xserver = {
@@ -32,19 +41,5 @@ in
     };
   };
   
-  nixpkgs.overlays = [
-    (self: super: {
-      # st = super.st.overrideAttrs (oldAttrs: rec {
-      #   patches = [ 
-      #     ./patch.st.1.vimhelp.dark.diff
-      #     ./patch.st.2.font.dejavumono.diff
-      #   ];
-      # });
-      dwm = super.dwm.overrideAttrs (oldAttrs: rec {
-        buildInputs = oldAttrs.buildInputs ++ [ pkgs.xorg.libXext ];
-        patches = [ ./patch.dwm.7.config.def.h.diff ];
-      });
-    })
-  ];
 }
 
