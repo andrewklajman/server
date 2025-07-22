@@ -8,11 +8,9 @@ in
   fonts.packages = with pkgs; [ source-code-pro font-awesome ];
   environment.systemPackages = with pkgs; [ 
     dmenu 
-    st 
-    pass
+    st tabbed
+    pass passmenulogin 
     xclip
-    passmenulogin 
-    tabbed
   ];
   
   services = {
@@ -36,18 +34,15 @@ in
   
   nixpkgs.overlays = [
     (self: super: {
-      st = super.st.overrideAttrs (oldAttrs: rec {
-        patches = [ 
-          ./patch.st.1.vimhelp.dark.diff
-          ./patch.st.2.font.dejavumono.diff
-        ];
-      });
+      # st = super.st.overrideAttrs (oldAttrs: rec {
+      #   patches = [ 
+      #     ./patch.st.1.vimhelp.dark.diff
+      #     ./patch.st.2.font.dejavumono.diff
+      #   ];
+      # });
       dwm = super.dwm.overrideAttrs (oldAttrs: rec {
         buildInputs = oldAttrs.buildInputs ++ [ pkgs.xorg.libXext ];
-        patches = [ 
-          ./patch.dwm.2.switchtotag.diff
-          ./patch.dwm.6.config.def.h.diff
-        ];
+        patches = [ ./patch.dwm.7.config.def.h.diff ];
       });
     })
   ];
