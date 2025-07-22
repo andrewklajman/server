@@ -8,7 +8,7 @@
     ./docker.nix
     ./environment.nix
     ./gnupg.nix
-    ./metubel.nix
+    ./metube.nix
     ./microsocks.nix
     ./mullvad.nix
     ./neovim.nix
